@@ -147,7 +147,7 @@ class Productionist(object):
             grammar_paths = [int(path_trie_key) for path_trie_key in all_paths_str.split(',')]
             tags = {id_to_tag[tag_id] for tag_id in all_tags_str.split(',')} if all_tags_str else set()
             expressible_meanings.append(
-                ExpressibleMeaning(meaning_id=int(meaning_id), tags=tags, grammar_paths=grammar_paths)
+                ExpressibleMeaning(meaning_id=int(meaning_id), tags=tags, recipes=grammar_paths)
             )
         expressible_meanings.sort(key=lambda em: em.id)
         return expressible_meanings
@@ -628,7 +628,7 @@ class ExpressibleMeaning(object):
     and they are reified as objects of the class Recipe, defined below.
     """
 
-    def __init__(self, meaning_id, tags, grammar_paths):
+    def __init__(self, meaning_id, tags, recipes):
         """Initialize an ExpressibleMeaning object."""
         self.id = meaning_id
         # A set including all the tags associated with this expressible meaning; these can be thought
@@ -638,7 +638,7 @@ class ExpressibleMeaning(object):
         # A list of the recipes for generating content that expresses the associated meaning; each is
         # represented as a compressed grammar path (i.e., one that, if its rules are executed in order,
         # will produce the exact set of tags associated with this expressible meaning)
-        self.recipes = self._init_build_recipes(grammar_paths=grammar_paths)
+        self.recipes = self._init_build_recipes(recipes=recipes)
 
     def __str__(self):
         """Return string representation."""
@@ -646,16 +646,16 @@ class ExpressibleMeaning(object):
             ', '.join(self.tags)
         )
 
-    def _init_build_recipes(self, grammar_paths):
+    def _init_build_recipes(self, recipes):
         """Return a list of Recipe objects, each corresponding to one of the grammar paths associated with
         this expressible meaning.
         """
-        recipes = []
-        for i in xrange(len(grammar_paths)):
-            path_trie_key = grammar_paths[i]
-            recipes.append(Recipe(recipe_id=i, expressible_meaning=self, path_trie_key=path_trie_key))
-        recipes.sort(key=lambda r: r.id)
-        return recipes
+        recipe_objects = []
+        for i in xrange(len(recipes)):
+            path_trie_key = recipe_objects[i]
+            recipe_objects.append(Recipe(recipe_id=i, expressible_meaning=self, path_trie_key=path_trie_key))
+        recipe_objects.sort(key=lambda r: r.id)
+        return recipe_objects
 
 
 class Recipe(object):
