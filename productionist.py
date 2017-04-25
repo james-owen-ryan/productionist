@@ -144,7 +144,7 @@ class Productionist(object):
         id_to_tag = self.grammar.id_to_tag
         for line in f.readlines():
             meaning_id, all_paths_str, all_tags_str = line.strip('\n').split('\t')
-            grammar_paths = [int(path_trie_key) for path_trie_key in all_paths_str.split(',')]
+            grammar_paths = [int(path_trie_key) for path_trie_key in all_paths_str.split('|')]
             tags = {id_to_tag[tag_id] for tag_id in all_tags_str.split(',')} if all_tags_str else set()
             expressible_meanings.append(
                 ExpressibleMeaning(meaning_id=int(meaning_id), tags=tags, recipes=grammar_paths)
