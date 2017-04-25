@@ -1,7 +1,7 @@
 # productionist
 Starter modules for doing Expressionist-based live text generation in games
 
-  SETUP INSTRUCTIONS
+### Setup Instructions
 
 Before using Reductionist (reductionist.py), you'll need to install the Python package marisa_trie. If you're on a Mac, you can simply use this terminal command from any directory on your computer:
 
@@ -10,12 +10,15 @@ Before using Reductionist (reductionist.py), you'll need to install the Python p
 If you're on a different OS, or if that didn't work, follow the installation instructions given here: https://pypi.python.org/pypi/marisa-trie.
 
 
-  PIPELINE
+### Pipeline
 
-Reductionist semantically indexes your Expressionist grammar to produce the set of files that are needed by Productionist to operate: a grammar file (.grammar), a trie file (.marisa), and an expressible-meanings file (.meanings).
+Reductionist semantically indexes your Expressionist grammar to produce the two files that are needed by Productionist to operate: 
+
+* A grammar file (.grammar) 
+* An expressible-meanings file (.meanings)
 
 
-  EXAMPLE USAGE: REDUCTIONIST
+### Example Usage: Reductionist
 
 What follows are examples of usage of the command-line interface to reductionist.py. You can also run this command to access help information:
 
@@ -25,13 +28,12 @@ To index a grammar, use a command like this:
 
 	python reductionist.py "myContentBundle" /path/to/directory/with/your/expressionist/grammar /path/to/write/output/files/to --verbosity=1
 
-This will cause Reductionist to semantically index your Expressionist grammar, which will create three new files in the specified output directory. In this example, these files would be written to:
+This will cause Reductionist to semantically index your Expressionist grammar, which will create two new files in the specified output directory. In this example, these files would be written to:
 	
-  -- Grammar file: /path/to/write/output/files/to/myContentBundle.grammar
-  -- Trie file: /path/to/write/output/files/to/myContentBundle.marisa
-  -- Expressible-meanings file: /path/to/write/output/files/to/myContentBundle.meanings
+* Grammar file: /path/to/write/output/files/to/myContentBundle.grammar
+* Expressible-meanings file: /path/to/write/output/files/to/myContentBundle.meanings
 
-  EXAMPLE USAGE: PRODUCTIONIST
+### Example Usage: Productionist
 
 What follows are examples of usage of the command-line interface to productionist.py. You can also run this command to access help information:
 
