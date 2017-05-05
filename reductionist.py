@@ -304,7 +304,6 @@ class Reductionist(object):
         # Prepare a grammar dictionary with the metadata that we need
         grammar_dictionary = {}
         # Add in metadata that we need
-        grammar_dictionary['tag_to_id'] = self.grammar.tag_to_id
         grammar_dictionary['id_to_tag'] = self.grammar.id_to_tag
         # Add in the grammar's nonterminal symbols (along with all necessary metadata)
         grammar_dictionary['nonterminal_symbols'] = {}

@@ -754,7 +754,6 @@ class Grammar(object):
         """Initialize a Grammar object."""
         # These get set by self._init_parse_content_file()
         self.nonterminal_symbols = None
-        self.tag_to_id = None
         self.id_to_tag = None
         # Parse the
         self._init_parse_json_grammar_specification(path_to_json_grammar_specification=grammar_file_location)
@@ -803,7 +802,6 @@ class Grammar(object):
             )
         # Grab out the dictionaries mapping tag IDs to the tags themselves, which we need to execute
         # expressible meanings
-        self.tag_to_id = grammar_dictionary['tag_to_id']
         self.id_to_tag = grammar_dictionary['id_to_tag']
         # Build objects for the nonterminal symbols defined in the spec
         symbol_objects = []
