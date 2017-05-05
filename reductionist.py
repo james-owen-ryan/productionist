@@ -259,11 +259,17 @@ class Reductionist(object):
             all_tags_for_that_path = set()
             for rule in rules_on_that_path:
                 all_tags_for_that_path |= set(rule.tags)
+            if self.trie_output:
+                # Use the trie key
+                grammar_path = trie_key_for_that_path_string
+            else:
+                # Use the expanded trie key, i.e., the list of production rule IDs constituting the grammar path
+                grammar_path = path_string
             try:
                 # If an expressible meaning already exists for this tagset, simply
                 # append the trie key for this path to its listing of associated paths
                 expressible_meaning = next(em for em in expressible_meanings if em.tags == all_tags_for_that_path)
-                expressible_meaning.grammar_paths.append(trie_key_for_that_path_string)
+                expressible_meaning.grammar_paths.append(grammar_path)
             except StopIteration:
                 # We haven't constructed an expressible meaning for that tagset yet, so do
                 # so now and pass along this path trie key as its first associated path (more will
@@ -272,7 +278,7 @@ class Reductionist(object):
                 expressible_meanings.append(
                     ExpressibleMeaning(
                         meaning_id=meaning_id, tags=all_tags_for_that_path,
-                        initial_grammar_path=trie_key_for_that_path_string
+                        initial_grammar_path=grammar_path
                     )
                 )
         return expressible_meanings
