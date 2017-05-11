@@ -290,7 +290,7 @@ class Reductionist(object):
         f = open(expressible_meanings_file_location, 'w')
         tag_to_id = self.grammar.tag_to_id
         for expressible_meaning in self.expressible_meanings:
-            if self.trie_output:
+            if not self.trie_output:
                 all_paths_str = '|'.join(
                     self.trie.restore_key(path_trie_key) for path_trie_key in expressible_meaning.grammar_paths
                 )
