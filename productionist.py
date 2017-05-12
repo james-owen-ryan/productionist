@@ -471,9 +471,8 @@ class Productionist(object):
         else:
             # Otherwise, we need to compute a utility distribution over the candidate wildcard rules
             scores = {}
-            for rule in nonterminal_symbol.production_rules:
-                if not rule.semantically_meaningful:
-                    scores[rule] = self._score_candidate_production_rule(production_rule=rule)
+            for rule in candidate_wildcard_rules:
+                scores[rule] = self._score_candidate_production_rule(production_rule=rule)
             # Check if any candidate even earned any points; if not, we can just pick randomly
             if not any(scores.values()):
                 selected_wildcard_rule = random.choice(candidate_wildcard_rules)
