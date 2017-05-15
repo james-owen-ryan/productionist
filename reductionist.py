@@ -22,9 +22,7 @@ class Reductionist(object):
         self.verbosity = verbosity
         # Build a grammar in memory, as an object of the Grammar class, by parsing a JSON file
         # exported by Expressionist
-        self.grammar = Grammar(
-            grammar_file_location=path_to_input_content_file
-        )
+        self.grammar = Grammar(grammar_file_location=path_to_input_content_file)
         # Create a start symbol and set of top-level production rules in the grammar
         self.grammar.create_start_symbol_and_top_level_production_rules()
         # Sort the symbol and rule lists
@@ -261,7 +259,7 @@ class Reductionist(object):
                 all_tags_for_that_path |= set(rule.tags)
             if self.trie_output:
                 # Use the trie key
-                grammar_path = trie_key_for_that_path_string
+                grammar_path = str(trie_key_for_that_path_string)
             else:
                 # Use the expanded trie key, i.e., the list of production rule IDs constituting the grammar path
                 grammar_path = path_string
@@ -290,12 +288,7 @@ class Reductionist(object):
         f = open(expressible_meanings_file_location, 'w')
         tag_to_id = self.grammar.tag_to_id
         for expressible_meaning in self.expressible_meanings:
-            if not self.trie_output:
-                all_paths_str = '|'.join(
-                    self.trie.restore_key(path_trie_key) for path_trie_key in expressible_meaning.grammar_paths
-                )
-            else:
-                all_paths_str = '|'.join(str(path_trie_key) for path_trie_key in expressible_meaning.grammar_paths)
+            all_paths_str = '|'.join(expressible_meaning.grammar_paths)
             all_tags_str = ','.join(tag_to_id[tag] for tag in expressible_meaning.tags)
             line = "{meaning_id}\t{paths}\t{tags}\n".format(
                 meaning_id=expressible_meaning.id, paths=all_paths_str, tags=all_tags_str
