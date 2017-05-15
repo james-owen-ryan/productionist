@@ -285,6 +285,7 @@ class Reductionist(object):
         """Save a set of constructed expressible meanings to a file."""
         if self.verbosity > 0:
             print "Saving expressible meanings file..."
+        print expressible_meanings_file_location
         f = open(expressible_meanings_file_location, 'w')
         tag_to_id = self.grammar.tag_to_id
         for expressible_meaning in self.expressible_meanings:
@@ -732,7 +733,7 @@ if __name__ == "__main__":
     output_path_and_filename = args.output_dir
     if output_path_and_filename[-1] != '/':
         output_path_and_filename += '/'
-        output_path_and_filename += args.content_bundle_name
+    output_path_and_filename += args.content_bundle_name
     # Index the grammar and save out the resulting files (content file [.content], trie file [.marisa], and
     # expressible meanings file [.meanings])
     reductionist = Reductionist(
