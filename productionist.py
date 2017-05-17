@@ -796,9 +796,9 @@ class Grammar(object):
         self.tags = set()
         for symbol in self.nonterminal_symbols:
             self.tags |= set(symbol.tags)
-        # Check whether at least one rule has an application frequency of 'unusual' or 'rare'; if
-        # no rule does, than Productionist may be able to choose rules randomly (this attrbiute is
-        # used to determine whether a 'scoring mode' is engaged, in Productionist.scoring_modes_engaged())
+        # Check whether any symbols have rules with unequal application frequencies; if none do, then
+        # Productionist may be able to choose rules randomly (this attribute is used to determine whether
+        # a 'scoring mode' is engaged, in Productionist.scoring_modes_engaged())
         self.unequal_rule_frequencies = len({r.application_frequency for r in self.production_rules}) > 1
         # Lastly, run some validation checks on the grammar before proceeding any further (this
         # is particularly needed in the case that an author has manually deformed any of the content
@@ -958,7 +958,7 @@ class ProductionRule(object):
         """Return string representation."""
         return '{head} --> {body}'.format(
             head=self.head,
-            body=''.join(symbol if type(symbol) is unicode else symbol.name for symbol in self.body)
+            body=''.join(symbol if type(symbol) is unicode else '[[{}]]'.format(symbol.name) for symbol in self.body)
         )
 
     def compile_tags(self):
