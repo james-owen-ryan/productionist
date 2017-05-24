@@ -298,6 +298,8 @@ class Productionist(object):
         elif not scoring_metric:
             selected_expressible_meaning = random.choice(candidates)
         else:
+            if self.verbosity > 0:
+                print "Scoring expressible meanings..."
             # If a scoring metric *was* provided in the content request, use it to rank the satisficing
             # expressible meaning; first, we need to score each of the candidate intermediate
             # representations using the scoring metric
@@ -317,6 +319,10 @@ class Productionist(object):
                 selected_expressible_meaning = self._select_candidate_given_probability_distribution(
                     probability_ranges=probability_ranges
                 )
+            if self.verbosity > 1:
+                print "Derived the following scores for expressible meanings:"
+                for candidate in scores:
+                    print "\tEM{em_id}\t{score}".format(em_id=candidate.id, score=scores[candidate])
         return selected_expressible_meaning
 
     @staticmethod
@@ -384,7 +390,8 @@ class Productionist(object):
         The score for this rule will be calculated according to its expansion-control tags (application
         frequency and usage constraint) and, if applicable, the current repetition penalties of the symbols
         symbols in its body (if repetition-penalty mode is engaged) and the number and length of symbols in
-        its body (if terse mode is engaged)."""
+        its body (if terse mode is engaged).
+        """
         score = 1.0
         # If applicable, adjust score according to repetition penalties and terseness
         for symbol in production_rule.body:
