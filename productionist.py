@@ -1156,5 +1156,5 @@ if __name__ == "__main__":
             print "--Tree expression--\n{expression}".format(expression=output.tree_expression)
             print "--Tree expression (with tags)--\n{expression}".format(expression=output.tree_expression_with_tags)
     # Lastly, save out the updated repetitions file, if applicable, for future use
-    if productionist.repetition_penalty_mode:
+    if productionist.repetition_penalty_mode and HAVE_REPETITIONS_FILE_PERSIST_ACROSS_RUNTIME_INSTANCES:
         productionist.save_repetition_penalties_file()
