@@ -543,7 +543,7 @@ class NonterminalSymbol(object):
 
     def __str__(self):
         """Return string representation."""
-        return '[[{name}]]'.format(name=self.name)
+        return '[[{name}]]'.format(name=self.name.encode('utf-8'))
 
     def _init_reify_production_rules(self, production_rules_specification):
         """Instantiate ProductionRule objects for the rules specified in production_rules_specification."""
