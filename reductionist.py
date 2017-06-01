@@ -597,7 +597,9 @@ class ProductionRule(object):
 
     def __str__(self):
         """Return string representation."""
-        return '{head} --> {body}'.format(head=self.head, body=self.body_specification_str)
+        return '{head} --> {body}'.format(
+            head=self.head.encode('utf-8'), body=self.body_specification_str.encode('utf-8')
+        )
 
     def compile_tags(self):
         """Compile all tags that are accessible from this production rule, meaning all the tags on all the symbols
