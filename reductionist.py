@@ -598,7 +598,7 @@ class ProductionRule(object):
     def __str__(self):
         """Return string representation."""
         return '{head} --> {body}'.format(
-            head=self.head.encode('utf-8'), body=self.body_specification_str.encode('utf-8')
+            head=str(self.head).encode('utf-8'), body=self.body_specification_str.encode('utf-8')
         )
 
     def compile_tags(self):
